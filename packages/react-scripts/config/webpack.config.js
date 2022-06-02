@@ -55,6 +55,7 @@ const babelRuntimeRegenerator = require.resolve('@babel/runtime/regenerator', {
 });
 
 const overridePublicPath = require('./overridePublicPath');
+const overrideOutput = require('./overrideOutput');
 
 // Some apps do not need the benefits of saving a web request, so not inlining the chunk
 // makes for a smoother build process.
@@ -216,6 +217,8 @@ module.exports = function (webpackEnv) {
     // This means they will be the "root" imports that are included in JS bundle.
     entry: paths.appIndexJs,
     output: {
+      ...overrideOutput,
+
       // The build folder.
       path: paths.appBuild,
       // Add /* filename */ comments to generated require()s in the output.
